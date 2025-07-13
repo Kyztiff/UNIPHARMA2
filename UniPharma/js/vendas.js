@@ -1,119 +1,105 @@
-// js/vendas.js
 document.addEventListener('DOMContentLoaded', function () {
 
     // --- Elementos do Pop-up de Manutenção de Vendas ---
-    // Apenas selecionamos os elementos que existem e são relevantes para a manutenção.
     const btnAdicionarVenda = document.getElementById('btnAdicionarVenda');
-    const manutencaoVendasPopup = document.getElementById('manutencaoPopup'); // Este é o overlay do modal de manutenção
-    
-    // Verifique se este botão existe no seu HTML dentro de 'manutencaoPopup'
+    const manutencaoVendasPopup = document.getElementById('manutencaoPopup'); 
     const closeManutencaoVendasButton = manutencaoVendasPopup ? manutencaoVendasPopup.querySelector('.close-button-manutencao') : null;
-    
     const btnVoltarManutencaoVendas = document.getElementById('btnVoltarManutencao');
     const btnSalvarManutencaoVenda = document.getElementById('btnSalvarManutencao');
-    const btnEditarVendasGeral = document.getElementById('btnEditarVendasGeral'); // Botão "Editar" do resumo
-    const tbodyVendas = document.getElementById('tbodyVendas'); // Tabela do resumo
+    const btnEditarVendasGeral = document.getElementById('btnEditarVendasGeral');
+    const tbodyVendas = document.getElementById('tbodyVendas');
 
-    // --- Campos do formulário de Manutenção de Vendas ---
+    // --- Campos do formulário ---
     const inputVendedor = document.getElementById('vendedor');
     const inputConvenio = document.getElementById('convenio');
     const inputCliente = document.getElementById('cliente');
     const textareaObservacoesVenda = document.getElementById('observacoes');
     const inputTotalVenda = document.getElementById('total');
 
-    // --- Funções para o Pop-up de Manutenção de Vendas ---
+    // --- Funções para abrir/fechar popup ---
     function openManutencaoVendasPopup() {
-        if (manutencaoVendasPopup) { // Verifica se o elemento foi encontrado antes de tentar manipulá-lo
-            manutencaoVendasPopup.style.display = 'flex'; // Abre o modal de manutenção (como overlay)
+        if (manutencaoVendasPopup) {
+            manutencaoVendasPopup.style.display = 'flex';
         } else {
             console.error("Elemento 'manutencaoPopup' não encontrado!");
         }
     }
 
     function closeManutencaoVendasPopup() {
-        if (manutencaoVendasPopup) { // Verifica se o elemento foi encontrado
-            manutencaoVendasPopup.style.display = 'none'; // Fecha o modal de manutenção
+        if (manutencaoVendasPopup) {
+            manutencaoVendasPopup.style.display = 'none';
         }
     }
 
-    // --- Event Listeners para a Página de Vendas (Resumo) ---
+    // --- Event Listeners ---
 
-    // Botão "Adicionar Venda" (no resumo, abre a manutenção)
+    // Abrir popup para nova venda
     if (btnAdicionarVenda) {
         btnAdicionarVenda.addEventListener('click', function () {
-            // Limpa os campos antes de abrir o formulário para uma nova entrada
             inputVendedor.value = '';
             inputConvenio.value = '';
             inputCliente.value = '';
             textareaObservacoesVenda.value = '';
             inputTotalVenda.value = '';
-
-            openManutencaoVendasPopup(); // Abre o modal de manutenção
-            // REMOVIDO: closeVendasPopup(); -- Não é mais necessário, e causava erro.
+            openManutencaoVendasPopup();
         });
     }
 
-    // Botão "Editar Vendas Geral" (no resumo, abre a manutenção vazia por enquanto)
+    // Editar vendas geral (por enquanto só abre o popup vazio)
     if (btnEditarVendasGeral) {
         btnEditarVendasGeral.addEventListener('click', function () {
-            alert("Para editar, você precisaria selecionar uma linha primeiro. Abrindo o formulário de manutenção vazio por enquanto.");
+            alert("Para editar, selecione uma linha primeiro. Abrindo formulário vazio.");
             openManutencaoVendasPopup();
-            // REMOVIDO: closeVendasPopup(); -- Não é mais necessário, e causava erro.
         });
     }
 
-    // Botão "Sair" do Resumo de Vendas
-    const btnSairVendasResumo = document.getElementById('btnSair'); // O ID é 'btnSair' no seu HTML
+    // Botão sair da página de vendas
+    const btnSairVendasResumo = document.getElementById('btnSair');
     if (btnSairVendasResumo) {
         btnSairVendasResumo.addEventListener('click', function () {
-            const confirmExit = confirm("Deseja sair da página de Vendas e voltar para o Dashboard?");
-            if (confirmExit) {
-                // Redireciona para a página principal (dashboard.html)
-                // Ajuste o caminho se necessário (ex: window.location.href = '../../index.html';)
-                window.location.href = '../index.html'; 
+            if (confirm("Deseja sair da página de Vendas e voltar para o Dashboard?")) {
+                window.location.href = '../index.html';
             }
         });
     }
 
-
-    // --- Event Listeners para o Pop-up de Manutenção de Vendas ---
-
-    // Botão de fechar dentro do modal de manutenção (se existir)
+    // Fechar popup pelo botão de fechar
     if (closeManutencaoVendasButton) {
         closeManutencaoVendasButton.addEventListener('click', closeManutencaoVendasPopup);
     }
 
-    // Botão "Voltar" dentro do modal de manutenção
+    // Botão voltar no popup de manutenção
     if (btnVoltarManutencaoVendas) {
         btnVoltarManutencaoVendas.addEventListener('click', function () {
-            const confirmSave = confirm("Deseja salvar as alterações?");
-            if (confirmSave) {
-                alert("Alterações de Manutenção de Vendas salvas com sucesso!");
+            if (confirm("Deseja salvar as alterações?")) {
+                alert("Alterações salvas com sucesso!");
             } else {
-                alert("Alterações de Manutenção de Vendas descartadas.");
+                alert("Alterações descartadas.");
             }
-            closeManutencaoVendasPopup(); // Fecha o modal
-            // REMOVIDO: openVendasPopup(); -- Não é mais necessário, pois o resumo é a página principal.
+            closeManutencaoVendasPopup();
         });
     }
 
-    document.getElementById("btnAdicionarItem").addEventListener("click", () => {
-    const tabela = document.querySelector(".item-table tbody");
+    // Adicionar nova linha de item na tabela (dentro do popup)
+    const btnAdicionarItem = document.getElementById("btnAdicionarItem");
+    if (btnAdicionarItem) {
+        btnAdicionarItem.addEventListener("click", () => {
+            const tabela = document.querySelector(".item-table tbody");
 
-    const novaLinha = document.createElement("tr");
-    novaLinha.innerHTML = `
-        <td><input type="text" class="produto-input" placeholder="Nome do produto"></td>
-        <td><input type="number" class="quantidade-input" min="1" value="1"></td>
-        <td><input type="number" class="valor-input" min="0" step="0.01" value="0.00"></td>
-        <td class="total-item">R$ 0,00</td>
-    `;
+            const novaLinha = document.createElement("tr");
+            novaLinha.innerHTML = `
+                <td><input type="text" class="produto-input" placeholder="Nome do produto"></td>
+                <td><input type="number" class="quantidade-input" min="1" value="1"></td>
+                <td><input type="number" class="valor-input" min="0" step="0.01" value="0.00"></td>
+                <td class="total-item">R$ 0,00</td>
+            `;
 
-    tabela.appendChild(novaLinha);
-    atualizarEventosDeSoma();
-});
+            tabela.appendChild(novaLinha);
+            // Se tiver função para atualizar soma, chame aqui: atualizarEventosDeSoma();
+        });
+    }
 
-
-    // Botão "Salvar" dentro do modal de manutenção
+    // Botão salvar venda - AQUI FAZ O FETCH PRA SALVAR NO BACK
     if (btnSalvarManutencaoVenda) {
         btnSalvarManutencaoVenda.addEventListener('click', function () {
             const vendedor = inputVendedor.value.trim();
@@ -127,37 +113,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            const novaVenda = {
-                vendedor,
-                convenio,
-                cliente,
-                observacoes,
-                total
-            };
+            const novaVenda = { vendedor, convenio, cliente, observacoes, total };
 
-            // Simulação de envio para o backend (AJAX)
-            // Em um ambiente real, você faria uma requisição Fetch/Axios aqui
-            console.log("Dados da Venda para salvar:", novaVenda);
-            alert("Venda salva e adicionada à tabela com sucesso (simulado)!");
+            fetch("http://localhost:3000/vendas", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(novaVenda)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error("Erro ao salvar a venda.");
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Venda salva com sucesso!");
+                    console.log("Resposta do servidor:", data);
 
-            // Gera um número e data para a tabela (se não vier do backend)
-            const numeroVenda = Math.floor(Math.random() * 100000) + 1000;
-            const dataVenda = new Date().toLocaleDateString('pt-BR');
+                    const numeroVenda = Math.floor(Math.random() * 100000) + 1000;
+                    const dataVenda = new Date().toLocaleDateString('pt-BR');
 
-            // Adiciona a nova linha na tabela de resumo
-            const newRow = tbodyVendas.insertRow(0);
-            newRow.insertCell(0).textContent = numeroVenda;
-            newRow.insertCell(1).textContent = cliente;
-            newRow.insertCell(2).textContent = dataVenda;
-            newRow.insertCell(3).textContent = total;
+                    const newRow = tbodyVendas.insertRow(0);
+                    newRow.insertCell(0).textContent = numeroVenda;
+                    newRow.insertCell(1).textContent = cliente;
+                    newRow.insertCell(2).textContent = dataVenda;
+                    newRow.insertCell(3).textContent = total;
 
-            closeManutencaoVendasPopup(); // Fecha o modal de manutenção
+                    closeManutencaoVendasPopup();
+                })
+                .catch(error => {
+                    alert("Erro ao salvar a venda no servidor.");
+                    console.error(error);
+                });
         });
     }
 
-    // --- Lógica do Menu de Perfil (já estava no seu HTML/JS, mova para app.js se quiser global) ---
-    // Se você já tem essa lógica no app.js (como discutimos antes para ser global),
-    // pode remover este bloco daqui. Se não, mantenha-o em todas as páginas.
+    // --- Lógica do Menu de Perfil ---
     const profileIcon = document.getElementById('Usuario2');
     const profileMenu = document.getElementById('profileMenu');
 
@@ -173,14 +162,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-});
 
-document.addEventListener("DOMContentLoaded", function() {
+    // Botão para redirecionar para cadastro de cliente
     const btnAdicionarClienteVendas = document.getElementById("btnAdicionarClienteVendas");
-
     if (btnAdicionarClienteVendas) {
-        btnAdicionarClienteVendas.addEventListener("click", function() {
-            window.location.href = "clientes.html"; // Redireciona para a página de cadastro
+        btnAdicionarClienteVendas.addEventListener("click", function () {
+            window.location.href = "clientes.html";
         });
     }
+
 });
