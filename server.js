@@ -2,8 +2,11 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
 const app = express();
 const PORT = 3000;
+
+const SEGREDO_JWT = 'unipharma123';
 
 app.use(cors());
 app.use(express.json());
@@ -313,6 +316,26 @@ app.delete('/api/usuarios/:id', (req, res) => {
   if (usuarios.length === inicial) return res.status(404).send('Usuário não encontrado');
   salvarDados('usuarios', usuarios);
   res.status(204).send();
+});
+
+//////////////////////////////////
+// ROTA DE LOGIN
+//////////////////////////////////
+app.post('/auth/login', (req, res) => {
+  const { usuario, senha } = req.body;
+
+  if (!usuario || !senha) {
+    return res.status(400).json({ error: 'Usuário e senha são obrigatórios' });
+  }
+
+  const user = usuarios.find(u => u.usuario === usuario && u.senha === senha);
+  if (!user) {
+    return res.status(401).json({ error: 'Credenciais inválidas' });
+  }
+
+  const token = jwt.sign({ id: user.id, usuario: user.usuario }, SEGREDO_JWT, { expiresIn: '1h' });
+
+  res.json({ token });
 });
 
 //////////////////////////////////
