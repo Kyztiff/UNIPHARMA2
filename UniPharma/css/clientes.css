@@ -1,0 +1,98 @@
+/* cadastro-cliente.css */
+
+.cadastro-container {
+    background-color: #DAB79F;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 60%; /* Ajuste a largura conforme necessário */
+    max-width: 700px;
+    margin: 50px auto; /* Centraliza o container */
+    color: #505230;
+}
+
+.cadastro-container h2 {
+    text-align: center;
+    color: #505230;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #505230;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+    width: calc(100% - 20px); /* Ocupa a largura total menos o padding */
+    padding: 10px;
+    border: 1px solid #505230;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #EDDBC5;
+    color: #505230;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus {
+    outline: none;
+    border-color: #DAB79F; /* Cor da borda ao focar */
+    box-shadow: 0 0 5px rgba(218, 183, 159, 0.5);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.form-actions button {
+    background-color: #505230;
+    color: #EDDBC5;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.form-actions button:hover {
+    background-color: #DAB79F;
+    color: #505230;
+    transform: translateY(-2px); /* Efeito de "levantar" no hover */
+}
+
+.form-actions button:active {
+    transform: translateY(0); /* Volta ao normal ao clicar */
+}
+
+/* Estilos para mensagens (feedback de sucesso/erro) */
+.mensagem {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mensagem.sucesso {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.mensagem.erro {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

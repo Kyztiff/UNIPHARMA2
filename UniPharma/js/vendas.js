@@ -174,3 +174,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const btnAdicionarClienteVendas = document.getElementById("btnAdicionarClienteVendas");
+
+    if (btnAdicionarClienteVendas) {
+        btnAdicionarClienteVendas.addEventListener("click", function() {
+            window.location.href = "clientes.html"; // Redireciona para a página de cadastro
+        });
+    }
+});
