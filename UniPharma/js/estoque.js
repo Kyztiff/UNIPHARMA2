@@ -1,102 +1,103 @@
+// js/estoque.js
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Estoque Pop-up Logic ---
-    const btnEstoque = document.getElementById('btnEstoque');
-    const estoquePopup = document.getElementById('estoquePopup');
-    const closeEstoqueButton = estoquePopup.querySelector('.close-button-estoque');
-    const btnAdicionarProduto = document.getElementById('btnAdicionarProduto');
-    const manutencaoEstoquePopup = document.getElementById('manutencaoEstoquePopup');
-    const closeManutencaoEstoqueButton = manutencaoEstoquePopup.querySelector('.close-button-manutencao-estoque');
-    const btnVoltarManutencaoEstoque = document.getElementById('btnVoltarManutencaoEstoque');
-    const btnSairEstoque = document.getElementById('btnSairEstoque');
-    const btnSalvarManutencaoEstoque = document.getElementById('btnSalvarManutencaoEstoque');
-    const btnEditarEstoqueGeral = document.getElementById('btnEditarEstoqueGeral');
-    const tbodyEstoque = document.getElementById('tbodyEstoque');
 
-    // Campos do formulário de Manutenção de Estoque
+    // --- Elementos do Pop-up de Manutenção de Estoque ---
+    // Apenas selecionamos os elementos que existem e são relevantes para a manutenção.
+    const btnAdicionarProduto = document.getElementById('btnAdicionarProduto');
+    const manutencaoEstoquePopup = document.getElementById('manutencaoEstoquePopup'); // Este é o overlay do modal de manutenção
+
+    // Verifique se este botão com a classe 'close-button-manutencao-estoque' existe no seu HTML dentro de 'manutencaoEstoquePopup'
+    const closeManutencaoEstoqueButton = manutencaoEstoquePopup ? manutencaoEstoquePopup.querySelector('.close-button-manutencao-estoque') : null;
+    
+    const btnVoltarManutencaoEstoque = document.getElementById('btnVoltarManutencaoEstoque');
+    const btnSairEstoque = document.getElementById('btnSairEstoque'); // Botão "Sair" do resumo de estoque
+    const btnSalvarManutencaoEstoque = document.getElementById('btnSalvarManutencaoEstoque');
+    const btnEditarEstoqueGeral = document.getElementById('btnEditarEstoqueGeral'); // Botão "Editar" do resumo
+    const tbodyEstoque = document.getElementById('tbodyEstoque'); // Tabela do resumo de estoque
+
+    // --- Campos do formulário de Manutenção de Estoque ---
     const inputCodigoProduto = document.getElementById('codigoProduto');
     const inputNomeProduto = document.getElementById('nomeProduto');
     const inputQuantidadeProduto = document.getElementById('quantidadeProduto');
     const inputValorUnitarioProduto = document.getElementById('valorUnitarioProduto');
     const textareaObservacoesProduto = document.getElementById('observacoesProduto');
 
-    // Funções para Estoque
-
+    // --- Funções para o Pop-up de Manutenção de Estoque ---
     function openManutencaoEstoquePopup() {
-        manutencaoEstoquePopup.style.display = 'flex';
+        if (manutencaoEstoquePopup) { // Verifica se o elemento foi encontrado antes de tentar manipulá-lo
+            manutencaoEstoquePopup.style.display = 'flex'; // Abre o modal de manutenção (como overlay)
+        } else {
+            console.error("Elemento 'manutencaoEstoquePopup' não encontrado!");
+        }
     }
 
     function closeManutencaoEstoquePopup() {
-        manutencaoEstoquePopup.style.display = 'none';
+        if (manutencaoEstoquePopup) { // Verifica se o elemento foi encontrado
+            manutencaoEstoquePopup.style.display = 'none'; // Fecha o modal de manutenção
+        }
     }
 
-    // Event Listeners para Estoque (Resumo)
-    if (btnEstoque) {
-        btnEstoque.addEventListener('click', function(event) {
-            event.preventDefault();
-            openEstoquePopup();
-        });
-    }
+    // --- Event Listeners para a Página de Estoque (Resumo) ---
 
-    if (closeEstoqueButton) {
-        closeEstoqueButton.addEventListener('click', closeEstoquePopup);
-    }
-
-    if (btnSairEstoque) {
-        btnSairEstoque.addEventListener('click', function() {
-            const confirmExit = confirm("Deseja salvar as alterações antes de sair?");
-            if (confirmExit) {
-                alert("Alterações de Estoque salvas com sucesso!");
-                closeEstoquePopup();
-            } else {
-                alert("Alterações de Estoque descartadas.");
-                closeEstoquePopup();
-            }
-        });
-    }
-
-    // Botão adicionar produto (abre manutenção)
+    // Botão "Adicionar Produto" (no resumo, abre a manutenção)
     if (btnAdicionarProduto) {
         btnAdicionarProduto.addEventListener('click', function() {
+            // Limpa os campos antes de abrir o formulário para uma nova entrada
             inputCodigoProduto.value = '';
             inputNomeProduto.value = '';
             inputQuantidadeProduto.value = '';
             inputValorUnitarioProduto.value = '';
             textareaObservacoesProduto.value = '';
 
-            openManutencaoEstoquePopup();
-            closeEstoquePopup();
+            openManutencaoEstoquePopup(); // Abre o modal de manutenção
+            // REMOVIDO: Chamada para closeEstoquePopup(); - Não é mais necessário, e causava erro.
         });
     }
 
-    // Botão edição geral (abre manutenção vazia)
+    // Botão "Editar Estoque Geral" (no resumo, abre a manutenção vazia por enquanto)
     if (btnEditarEstoqueGeral) {
         btnEditarEstoqueGeral.addEventListener('click', function() {
             alert("Para editar, você precisaria selecionar uma linha primeiro. Abrindo o formulário de manutenção vazio por enquanto.");
             openManutencaoEstoquePopup();
-            closeEstoquePopup();
+            // REMOVIDO: Chamada para closeEstoquePopup(); - Não é mais necessário, e causava erro.
         });
     }
 
-    // Event Listeners para Manutenção de Estoque
+    // Botão "Sair" do Resumo de Estoque
+    if (btnSairEstoque) {
+        btnSairEstoque.addEventListener('click', function() {
+            const confirmExit = confirm("Deseja sair da página de Estoque e voltar para o Dashboard?");
+            if (confirmExit) {
+                // Redireciona para a página principal (dashboard.html ou index.html)
+                // Ajuste o caminho ../index.html se necessário de acordo com sua estrutura de pastas
+                window.location.href = '../index.html';
+            }
+        });
+    }
+
+
+    // --- Event Listeners para o Pop-up de Manutenção de Estoque ---
+
+    // Botão de fechar dentro do modal de manutenção (se existir)
     if (closeManutencaoEstoqueButton) {
         closeManutencaoEstoqueButton.addEventListener('click', closeManutencaoEstoquePopup);
     }
 
+    // Botão "Voltar" dentro do modal de manutenção
     if (btnVoltarManutencaoEstoque) {
         btnVoltarManutencaoEstoque.addEventListener('click', function() {
             const confirmSave = confirm("Deseja salvar as alterações?");
             if (confirmSave) {
                 alert("Alterações de Manutenção de Estoque salvas com sucesso!");
-                closeManutencaoEstoquePopup();
-                openEstoquePopup();
             } else {
                 alert("Alterações de Manutenção de Estoque descartadas.");
-                closeManutencaoEstoquePopup();
-                openEstoquePopup();
             }
+            closeManutencaoEstoquePopup(); // Fecha o modal
+            // REMOVIDO: openEstoquePopup(); - Não é mais necessário, pois o resumo é a página principal.
         });
     }
 
+    // Botão "Salvar" dentro do modal de manutenção
     if (btnSalvarManutencaoEstoque) {
         btnSalvarManutencaoEstoque.addEventListener('click', function() {
             const codigo = inputCodigoProduto.value.trim();
@@ -105,29 +106,26 @@ document.addEventListener('DOMContentLoaded', function() {
             const valorUnitario = inputValorUnitarioProduto.value.trim();
 
             if (codigo && nome && quantidade && valorUnitario) {
-                const newRow = tbodyEstoque.insertRow(0);
-
-                const cellCodigo = newRow.insertCell(0);
-                const cellProduto = newRow.insertCell(1);
-                const cellQuantidade = newRow.insertCell(2);
-                const cellValorUnitario = newRow.insertCell(3);
-
-                cellCodigo.textContent = codigo;
-                cellProduto.textContent = nome;
-                cellQuantidade.textContent = quantidade;
-                cellValorUnitario.textContent = valorUnitario;
+                // Simulação: Adiciona a nova linha na tabela de resumo do Estoque
+                const newRow = tbodyEstoque.insertRow(0); // Insere no topo da tabela
+                newRow.insertCell(0).textContent = codigo;
+                newRow.insertCell(1).textContent = nome;
+                newRow.insertCell(2).textContent = quantidade;
+                newRow.insertCell(3).textContent = valorUnitario;
 
                 alert("Produto em Estoque salvo e adicionado à tabela com sucesso!");
             } else {
                 alert("Por favor, preencha todos os campos (Código, Produto, Quantidade, Valor Unit.) para salvar o produto em estoque.");
             }
 
-            closeManutencaoEstoquePopup();
-            openEstoquePopup();
+            closeManutencaoEstoquePopup(); // Fecha o modal de manutenção
         });
     }
 
-    // Lógica do Menu de Perfil (comum)
+    // --- Lógica do Menu de Perfil (comum) ---
+    // Esta lógica deve ser movida para um arquivo JS global (como app.js)
+    // e incluída em todas as páginas, para evitar duplicação e garantir funcionamento consistente.
+    // Se você já tem isso em app.js e está incluindo app.js em todas as páginas, pode REMOVER este bloco daqui.
     const profileIcon = document.getElementById('Usuario2');
     const profileMenu = document.getElementById('profileMenu');
 
