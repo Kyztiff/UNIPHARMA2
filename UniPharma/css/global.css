@@ -148,22 +148,30 @@ body {
     max-height: 800px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
 }
 
 .popup-content h2,
 .popup-content-manutencao h3 {
     color: #505230;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
+    font-size: 1.5rem;
 }
 
 /* --- Estilos de BOTÕES DE AÇÃO GERAIS --- */
 .table-actions { /* Usado para os botões da tabela de resumo */
     display: flex;
     justify-content: flex-end;
+    gap: 5px;
+    margin-top: 2px;
+}
+
+.manutencao-actions {
+    display: flex;
+    justify-content: flex-end;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .action-button, /* Botões na tabela de resumo */
@@ -174,7 +182,7 @@ body {
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     transition: background-color 0.3s ease;
     display: flex;
     justify-content: center;
@@ -199,26 +207,27 @@ body {
 .form-row {
     display: flex;
     justify-content: space-between;
-    gap:20px;
-    margin-bottom: 5px;
+    gap: 5px;
+    margin-bottom: 0px;
 }
 
 .form-group {
-    flex: 1;
+    flex: 0.5;
     display: flex;
     flex-direction: column;
 }
 
 .form-group label {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+    font-size: 0.8rem;
     color: #505230;
 }
 
 .input-with-icon {
     display: flex;
     align-items: center;
-    border: 1px solid #505230;
+    border: 0.5px solid #505230;
     border-radius: 5px;
     padding: 5px;
     background-color: #EDDBC5; /* Seu original: EDDBC5 */
@@ -253,11 +262,9 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 10px;
     flex-shrink: 0;
-    padding: 0;
 }
-
 .input-with-icon .add-button img {
     height: 18px;
     width: 18px;
@@ -266,8 +273,9 @@ body {
 
 /* --- Estilos da TABELA DE ITENS (Dentro do popup de Manutenção) --- */
 .item-table-container {
-    flex-grow: 2;
+    flex-grow: 3;
     overflow-y: auto;
+    overflow-x: auto;
     border: 2px solid #DAB79F; /* Seu original: DAB79F */
     border-radius: 5px;
     background-color: #EDDBC5; /* Seu original: EDDBC5 */
@@ -281,16 +289,17 @@ body {
 
 .item-table th, .item-table td {
     border: 1px solid #505230; /* Seu original: 505230 */
-    padding: 10px 12px; /* Seu original: 10px 12px */
+    padding: 8px 12px; /* Seu original: 10px 12px */
     text-align: left;
     color: #505230;
-    font-size: 1.1em;
+    font-size: 1.1rem;
 }
 
 .item-table th {
     background-color: #DAB79F; /* Seu original: DAB79F */
     color: #505230;
     font-weight: 700;
+    font-size: 1.2rem;
 }
 
 .item-table tbody tr:nth-child(even) {
@@ -307,12 +316,12 @@ body {
 .bottom-section {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
-    margin-top: 5px;
+    gap: 5px;
+    margin-top: 0px;
 }
 
 .observacoes {
-    flex: 2;
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -335,7 +344,7 @@ body {
 }
 
 .total-field {
-    flex: 1;
+    flex: 0.5;
     display: flex;
     flex-direction: column;
 }

@@ -31,26 +31,24 @@
             <div class="tipo-opcao" data-tipo="compras">Relatório de Compras</div>
             <div class="tipo-opcao" data-tipo="vendas">Relatório de Vendas</div>
             <div class="tipo-opcao" data-tipo="clientes">Relatório de Clientes</div>
-
-            <div class="btn-container">
-                <button id="btnCancelar1">Cancelar</button>
             </div>
-        </div>
 
         <div id="etapaPeriodo" class="popup-content" style="display:none;"> <h2>Escolha o período</h2>
+          <div class="campo-data">
             <label for="dataInicio">Data Inicial:</label>
             <input type="date" id="dataInicio" />
             <label for="dataFim">Data Final:</label>
             <input type="date" id="dataFim" />
+          </div>
             <div class="btn-container">
                 <button id="btnVoltar2">Voltar</button>
-                <button id="btnAvancar2" disabled>Gerar Relatório</button>
+                <button id="btnAvancar2">Gerar Relatório</button>
             </div>
         </div>
     </div>
 
-    <div id="tabelaRelatorioPopup" class="popup-overlay"> <div id="tabelaRelatorioContent" class="popup-content-manutencao"> 
-            <h2>Relatório: <span id="tituloRelatorio"></span></h2>
+    <div id="tabelaRelatorioPopup" class="popup-overlay"> <div id="tabelaRelatorioContent" class="popup-content-manutencao">
+            <h2><span id="tituloRelatorio"></span></h2>
             <p>Período: <span id="periodoSelecionado"></span></p>
             <table>
                 <thead>
@@ -60,7 +58,7 @@
             </table>
             <div class="btn-container">
                 <button id="btnVoltar3">Voltar</button>
-                <button id="btnFecharTabelaRelatorio" aria-label="FE">Fechar</button>
+                <button id="btnFechar3">Fechar</button>
             </div>
         </div>
     </div>

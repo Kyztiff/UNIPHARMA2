@@ -97,6 +97,22 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    document.getElementById("btnAdicionarItem").addEventListener("click", () => {
+    const tabela = document.querySelector(".item-table tbody");
+
+    const novaLinha = document.createElement("tr");
+    novaLinha.innerHTML = `
+        <td><input type="text" class="produto-input" placeholder="Nome do produto"></td>
+        <td><input type="number" class="quantidade-input" min="1" value="1"></td>
+        <td><input type="number" class="valor-input" min="0" step="0.01" value="0.00"></td>
+        <td class="total-item">R$ 0,00</td>
+    `;
+
+    tabela.appendChild(novaLinha);
+    atualizarEventosDeSoma();
+});
+
+
     // Botão "Salvar" dentro do modal de manutenção
     if (btnSalvarManutencaoVenda) {
         btnSalvarManutencaoVenda.addEventListener('click', function () {

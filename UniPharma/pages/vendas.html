@@ -51,12 +51,13 @@
                     <button class="action-button" id="btnAdicionarVenda">
                         <img src="../img/Mais.svg" alt="símbolo de mais">
                     </button>
-                    <button class="manutencao-action-button" id="btnExcluirManutencaoEstoque">
-                    <img src="../img/Cancelar.svg" alt="símbolo de Excluir">
                     <button class="action-button" id="btnEditarVendasGeral">
                         <img src="../img/Edit.svg" alt="símbolo de edição">
                     </button>
-                    <button class="action-button" id="btnSair"> <img src="../img/Exit.svg" alt="símbolo de sair">
+                    <button class="manutencao-action-button" id="btnExcluirManutencaoEstoque">
+                        <img src="../img/Cancelar.svg" alt="símbolo de Excluir">
+                    <button class="action-button" id="btnSair"> 
+                        <img src="../img/Exit.svg" alt="símbolo de sair">
                     </button>
                 </div>
             </div>
@@ -85,15 +86,16 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="cliente">CLIENTE</label>
-                    <div class="input-with-icon">
+                     <label for="cliente">CLIENTE</label>
+                <div class="input-with-icon">
                         <img src="../img/Cliente.svg" alt="Ícone de Cliente">
-                        <input type="text" id="cliente">
-                        <button class="add-button">+</button>
-                    </div>
+                     <input type="text" id="cliente">
+                     <button class="add-button" title="Adicionar Cliente">
+                        <img src="../img/Mais.svg" alt="Adicionar Cliente">
+                     </button>
                 </div>
             </div>
-
+        </div>
             <div class="item-table-container">
                 <table class="item-table">
                     <thead>
@@ -105,18 +107,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td><td></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -124,7 +114,7 @@
             <div class="bottom-section">
                 <div class="observacoes">
                     <label for="observacoes">OBSERVAÇÕES:</label>
-                    <textarea id="observacoes"></textarea>
+                    <textarea id="observacoes" placeholder="Observações de vendas..."></textarea>
                 </div>
                 <div class="total-field">
                     <label for="total">TOTAL:</label>
@@ -133,6 +123,12 @@
             </div>
 
             <div class="manutencao-actions">
+                <button class="manutencao-action-button" id="btnAdicionarItem">
+                    <img src="../img/Mais.svg" alt="símbolo de salvar">
+                </button>
+                <button class="manutencao-action-button" id="btnExcluirItem">
+                    <img src="../img/Cancelar.svg" alt="símbolo de salvar">
+                </button>
                 <button class="manutencao-action-button" id="btnSalvarManutencao">
                     <img src="../img/Salvar.svg" alt="símbolo de salvar">
                 </button>
