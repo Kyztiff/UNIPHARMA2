@@ -329,8 +329,8 @@ body {
     border: 1px solid #505230;
     border-radius: 5px;
     padding: 8px;
-    background-color: white;
-    color: #505230;
+    background-color: #EDDBC5;
+    color:#505230;
     resize: vertical;
 }
 
@@ -372,12 +372,6 @@ body {
     border-top: 1px solid #ddd;
     margin: 5px 0;
 }
-/* Estilos globais */
-body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-}
-
 .container {
     display: flex;
     height: 100vh;
@@ -431,7 +425,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: #EDDBC5;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);

@@ -1,0 +1,120 @@
+/* relatorios.css */
+
+/* Botões de escolha do tipo de relatório */
+.tipo-opcao {
+    background-color: #EDDBC5;
+    border: 2px solid #505230;
+    padding: 20px;
+    margin: 20px auto;
+    width: 60%;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #505230;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.tipo-opcao:hover {
+    background-color: #DAB79F;
+    color: white;
+}
+
+/* Estilo do container da etapa de período */
+#etapaPeriodo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+/* Inputs de data */
+#etapaPeriodo label {
+    font-weight: 600;
+    color: #505230;
+    margin: 10px 0 5px;
+}
+
+#etapaPeriodo input[type="date"] {
+    padding: 10px;
+    border: 1px solid #505230;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: white;
+    color: #505230;
+    width: 60%;
+    margin-bottom: 15px;
+}
+
+/* Botões de navegação */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn-container button {
+    background-color: #505230;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-container button:hover {
+    background-color: #DAB79F;
+    color: #505230;
+}
+
+/* Popup de tabela (respeita seu estilo original) */
+#tabelaRelatorioPopup {
+    display: none;
+    position: fixed;
+    top: 100px;
+    left: 300px;
+    width: calc(100% - 300px);
+    height: calc(100% - 100px);
+
+    z-index: 1001;
+    padding: 20px;
+    overflow: auto;
+}
+
+#tabelaRelatorioContent {
+    background-color: #DAB79F;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    margin: auto;
+}
+
+#tabelaRelatorioContent h2,
+#tabelaRelatorioContent p {
+    color: #505230;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#tabelaRelatorioContent table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+#tabelaRelatorioContent th,
+#tabelaRelatorioContent td {
+    border: 1px solid #505230;
+    padding: 10px;
+    text-align: left;
+    color: #505230;
+}
+
+#tabelaRelatorioContent th {
+    background-color: #EDDBC5;
+}
