@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*reset basico*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../img/background.png");
+    color:#EDDBC5;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    text-align: CENTER;
+}
+
+.tela_login{
+    background-color: transparent;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    text-align: center;
+    color: #EDDBC5;
+    width: 400px; 
+    max-width: 90vw; 
+    padding: 40px;
+}
+
+
+#logo {
+    width: 70px;
+    height: auto;
+    margin-bottom: 10px; 
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#user {
+    background-image: url("../img/User.svg");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-left: 40px;
+}
+
+#password {
+    background-image: url("../img/senha.svg");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-left: 40px;
+}
+
+.login {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #EDDBC5;
+    outline: none;
+    border-radius: 3px;
+    background-color: transparent;
+    color:#EDDBC5;
+    font-size: 0.8rem;
+    font-weight: 250;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    /* Cor do fundo do input quando autocompletado */
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* Truque para mudar o background */
+    -webkit-text-fill-color: #EDDBC5 !important; /* Cor do texto quando autocompletado */
+    background-color: transparent !important; /* Garante fundo transparente */
+    font-family: "Montserrat", sans-serif !important; /* Força a fonte */
+    font-weight: 250 !important; /* Força o peso da fonte */
+    text-transform: uppercase !important; /* Força o texto maiúsculo */
+    transition: background-color 5000s ease-in-out 0s; /* Faz a transição do fundo muito lenta, quase imperceptível */
+}
+
+input::placeholder{
+    color: #EDDBC5;
+    font-weight: 250;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+}
+
+a {
+    text-align: right;
+    color:#EDDBC5;
+    font-size: 1rem;
+    display: block;
+    text-align: right; 
+    margin-top: 5px;
+    padding-right: 5px;
+
+}
+
+
+button{
+    background-color: #EDDBC5;
+    border: none;
+    color: #505230;
+    padding: 0.5rem;
+    border-radius: 3px;
+    width: 100%;
+    font-weight: 600;
+    text-transform: uppercase;
+    
+}
+
+button:hover {
+    background-color: #DAB79F;
+}
+
+a:hover {
+    color: #DAB79F;
+}
+

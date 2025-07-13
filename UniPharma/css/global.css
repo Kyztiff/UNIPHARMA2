@@ -1,0 +1,442 @@
+/* global.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    background-color: #EDDBC5;
+    color: #505230;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    text-align: left;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.topnav {
+    background-color: #505230;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+#Usuario2 {
+    width: 45.83px;
+    height: 45.83px;
+}
+
+#logo {
+    width: 55px;
+    height: 55px;
+}
+
+.sidenav {
+    height: 100vh;
+    width: 282px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    background-color: #505230;
+    overflow-x: hidden;
+    padding-top: 20px;
+    flex-shrink: 0;
+    z-index: 99;
+}
+
+.sidenav a {
+    padding: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #EDDBC5;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #DAB79F;
+    background-color: rgba(218, 183, 159, 0.2);
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+/* --- Estilos da TABELA DE RESUMO (Originalmente no seu global.css) --- */
+.popup-content .tabela-resumo h3 {
+    color: #505230;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.tabela-resumo table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabela-resumo th, .tabela-resumo td {
+    border: 1px solid #505230;
+    padding: 12px;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+.tabela-resumo th {
+    background-color: #EDDBC5;
+    color: #505230;
+}
+
+/* --- Estilos de POPUPS GERAIS (Estrutura) --- */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 1000;
+    align-items: flex-start;
+    padding-top: 109px;
+    padding-left: 325px;
+}
+
+.main-content {
+    margin-top: 100px; /* Espaço para o topnav */
+    margin-left: 300px; /* Espaço para o sidenav */
+    padding: 20px;
+    flex-grow: 1; /* Se o body for flex container */
+}
+
+.popup-content,
+.popup-content-manutencao {
+    background-color: #DAB79F;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.popup-content {
+    width: 75vw;
+    height: 80vh;
+    max-height: 90vh;
+    position: relative;
+}
+
+.popup-content-manutencao {
+    width: 80vw;
+    max-width: 1100px;
+    height: 80vh;
+    max-height: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.popup-content h2,
+.popup-content-manutencao h3 {
+    color: #505230;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* --- Estilos de BOTÕES DE AÇÃO GERAIS --- */
+.table-actions { /* Usado para os botões da tabela de resumo */
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.action-button, /* Botões na tabela de resumo */
+.manutencao-action-button { /* Botões no popup de manutenção */
+    background-color: #505230;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+
+.action-button img,
+.manutencao-action-button img {
+    height: 24px;
+    width: 24px
+}
+
+.action-button:hover,
+.manutencao-action-button:hover {
+    background-color: #EDDBC5;
+    color: #505230;
+}
+
+/* --- Estilos de FORMULÁRIOS GERAIS (Para inputs na manutenção) --- */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap:20px;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #505230;
+}
+
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    border: 1px solid #505230;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #EDDBC5; /* Seu original: EDDBC5 */
+}
+
+.input-with-icon select,
+.input-with-icon input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    padding: 5px;
+    background-color: transparent;
+    color: #505230;
+    appearance: none;
+    cursor: pointer;
+}
+
+.input-with-icon img {
+    height: 20px;
+    margin-right: 8px;
+}
+
+.input-with-icon .add-button {
+    background-color: #505230;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 5px;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.input-with-icon .add-button img {
+    height: 18px;
+    width: 18px;
+    margin: 0;
+}
+
+/* --- Estilos da TABELA DE ITENS (Dentro do popup de Manutenção) --- */
+.item-table-container {
+    flex-grow: 2;
+    overflow-y: auto;
+    border: 2px solid #DAB79F; /* Seu original: DAB79F */
+    border-radius: 5px;
+    background-color: #EDDBC5; /* Seu original: EDDBC5 */
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
+}
+
+.item-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.item-table th, .item-table td {
+    border: 1px solid #505230; /* Seu original: 505230 */
+    padding: 10px 12px; /* Seu original: 10px 12px */
+    text-align: left;
+    color: #505230;
+    font-size: 1.1em;
+}
+
+.item-table th {
+    background-color: #DAB79F; /* Seu original: DAB79F */
+    color: #505230;
+    font-weight: 700;
+}
+
+.item-table tbody tr:nth-child(even) {
+    background-color: #F8F4EE;
+}
+
+.item-table tbody tr:hover {
+    background-color: #C7A78E; /* Seu original: C7A78E */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* --- Estilos do RODAPÉ DA MANUTENÇÃO (Observações e Total) --- */
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.observacoes {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.observacoes label,
+.total-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #505230;
+}
+
+.observacoes textarea,
+.total-field input {
+    border: 1px solid #505230;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: white;
+    color: #505230;
+    resize: vertical;
+}
+
+.total-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-menu {
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    min-width: 150px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.profile-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.profile-menu a:hover {
+    background-color: #e2e2e2;
+}
+
+.profile-menu hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 5px 0;
+}
+/* Estilos globais */
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Barra lateral */
+.sidebar {
+    width: 300px;
+    background-color: #4A4E30;
+    padding-top: 20px;
+    color: #F5E3C3;
+}
+
+.sidebar a {
+    display: block;
+    color: #F5E3C3;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.sidebar a:hover {
+    background-color: #3E4229;
+}
+
+/* Cabeçalho */
+.header {
+    background-color: #4A4E30;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+/* Conteúdo principal */
+.main {
+    flex-grow: 1;
+    background-color: #F5E3C3;
+    margin-left: 300px;
+    padding: 80px 20px 20px 20px;
+    position: relative; /* Adicionado para permitir posicionamento absoluto de elementos internos */
+}
+
+/* Estilos adicionais do pop-up */
+.popup-relatorio {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 90%;
+    max-width: 600px;
+    display: none; /* Inicia oculto, controle com JS */
+}

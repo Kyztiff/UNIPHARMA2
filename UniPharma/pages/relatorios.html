@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Relatórios UniPharma</title>
+  <style>
+    /* Área principal clara do site */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px;
+      background-color: #ffffff;
+      min-height: 100vh;
+    }
+
+    /* Botão de demonstração */
+    .abrir-relatorio-btn {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .abrir-relatorio-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Pop-up overlay */
+    #relatoriosPopup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    /* Conteúdo do pop-up */
+    #relatoriosContent {
+      background: white;
+      width: 480px;
+      border-radius: 8px;
+      padding: 20px 25px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    h2 {
+      margin-top: 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .tipo-opcao {
+      border: 2px solid #007BFF;
+      border-radius: 6px;
+      padding: 15px 10px;
+      margin: 10px 0;
+      font-size: 18px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .tipo-opcao:hover {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .btn-container {
+      margin-top: 25px;
+      text-align: right;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+      background-color: #007BFF;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+      cursor: default;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    input[type="date"] {
+      width: 100%;
+      padding: 7px 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1.5px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    #btnFecharRelatorios {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    #btnFecharRelatorios:hover {
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dashboard UniPharma</h1>
+    <p>Clique no botão abaixo para gerar relatórios personalizados:</p>
+    <button class="abrir-relatorio-btn" onclick="abrirPopUp()">Abrir Relatórios</button>
+  </div>
+
+  <!-- Pop-up -->
+  <div id="relatoriosPopup" role="dialog" aria-modal="true" aria-labelledby="tituloPopup">
+    <div id="relatoriosContent">
+      <button id="btnFecharRelatorios" aria-label="Fechar pop-up">&times;</button>
+      
+      <!-- Etapa 1: Escolha tipo relatório -->
+      <div id="etapaTipoRelatorio">
+        <h2 id="tituloPopup">Selecione o tipo de relatório</h2>
+        <div class="tipo-opcao" data-tipo="compras">Relatório de Compras</div>
+        <div class="tipo-opcao" data-tipo="vendas">Relatório de Vendas</div>
+        <div class="tipo-opcao" data-tipo="clientes">Relatório de Clientes</div>
+
+        <div class="btn-container">
+          <button id="btnCancelar1">Cancelar</button>
+        </div>
+      </div>
+
+      <!-- Etapa 2: Escolha período -->
+      <div id="etapaPeriodo" style="display:none;">
+        <h2>Escolha o período</h2>
+        <label for="dataInicio">Data Inicial:</label>
+        <input type="date" id="dataInicio" />
+        <label for="dataFim">Data Final:</label>
+        <input type="date" id="dataFim" />
+        <div class="btn-container">
+          <button id="btnVoltar2">Voltar</button>
+          <button id="btnAvancar2" disabled>Avançar</button>
+        </div>
+      </div>
+
+      <!-- Etapa 3: Tabela -->
+      <div id="etapaTabela" style="display:none;">
+        <h2>Relatório: <span id="tituloRelatorio"></span></h2>
+        <p>Período: <span id="periodoSelecionado"></span></p>
+        <table>
+          <thead>
+            <tr id="tabelaCabecalho"></tr>
+          </thead>
+          <tbody id="tabelaCorpo"></tbody>
+        </table>
+        <div class="btn-container">
+          <button id="btnVoltar3">Voltar</button>
+          <button id="btnFechar3">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const popup = document.getElementById('relatoriosPopup');
+    const etapa1 = document.getElementById('etapaTipoRelatorio');
+    const etapa2 = document.getElementById('etapaPeriodo');
+    const etapa3 = document.getElementById('etapaTabela');
+
+    const btnFechar = document.getElementById('btnFecharRelatorios');
+    const btnCancelar1 = document.getElementById('btnCancelar1');
+    const btnVoltar2 = document.getElementById('btnVoltar2');
+    const btnAvancar2 = document.getElementById('btnAvancar2');
+    const btnVoltar3 = document.getElementById('btnVoltar3');
+    const btnFechar3 = document.getElementById('btnFechar3');
+
+    const tipoOpcoes = document.querySelectorAll('.tipo-opcao');
+
+    const inputDataInicio = document.getElementById('dataInicio');
+    const inputDataFim = document.getElementById('dataFim');
+
+    const tituloRelatorio = document.getElementById('tituloRelatorio');
+    const periodoSelecionado = document.getElementById('periodoSelecionado');
+    const tabelaCabecalho = document.getElementById('tabelaCabecalho');
+    const tabelaCorpo = document.getElementById('tabelaCorpo');
+
+    let tipoSelecionado = null;
+
+    function abrirPopUp(){
+      popup.style.display = 'flex';
+      resetarPopUp();
+    }
+
+    function fecharPopUp(){
+      popup.style.display = 'none';
+    }
+
+    btnFechar.addEventListener('click', fecharPopUp);
+    btnCancelar1.addEventListener('click', fecharPopUp);
+    btnFechar3.addEventListener('click', fecharPopUp);
+
+    function resetarPopUp(){
+      tipoSelecionado = null;
+      etapa1.style.display = 'block';
+      etapa2.style.display = 'none';
+      etapa3.style.display = 'none';
+      inputDataInicio.value = '';
+      inputDataFim.value = '';
+      btnAvancar2.disabled = true;
+      tabelaCabecalho.innerHTML = '';
+      tabelaCorpo.innerHTML = '';
+    }
+
+    tipoOpcoes.forEach(opcao => {
+      opcao.addEventListener('click', () => {
+        tipoSelecionado = opcao.dataset.tipo;
+        etapa1.style.display = 'none';
+        etapa2.style.display = 'block';
+      });
+    });
+
+    function validarDatas() {
+      const inicio = inputDataInicio.value;
+      const fim = inputDataFim.value;
+      btnAvancar2.disabled = !(inicio && fim && fim >= inicio);
+    }
+
+    inputDataInicio.addEventListener('change', validarDatas);
+    inputDataFim.addEventListener('change', validarDatas);
+
+    btnVoltar2.addEventListener('click', () => {
+      etapa2.style.display = 'none';
+      etapa1.style.display = 'block';
+    });
+
+    btnAvancar2.addEventListener('click', () => {
+      etapa2.style.display = 'none';
+      etapa3.style.display = 'block';
+      montarTabela();
+    });
+
+    btnVoltar3.addEventListener('click', () => {
+      etapa3.style.display = 'none';
+      etapa2.style.display = 'block';
+    });
+
+    function montarTabela() {
+      tituloRelatorio.textContent = tipoSelecionado.charAt(0).toUpperCase() + tipoSelecionado.slice(1);
+      periodoSelecionado.textContent = `${inputDataInicio.value} até ${inputDataFim.value}`;
+
+      let cabecalhos = [];
+      let dados = [];
+
+      if(tipoSelecionado === 'compras'){
+        cabecalhos = ['ID Compra', 'Produto', 'Quantidade', 'Data', 'Fornecedor'];
+        dados = [
+          ['C001', 'Paracetamol', 100, '2025-06-05', 'Farmacéutica A'],
+          ['C002', 'Dipirona', 50, '2025-06-10', 'Farmacéutica B'],
+          ['C003', 'Ibuprofeno', 75, '2025-06-15', 'Farmacéutica A'],
+        ];
+      } else if(tipoSelecionado === 'vendas'){
+        cabecalhos = ['ID Venda', 'Cliente', 'Produto', 'Quantidade', 'Data'];
+        dados = [
+          ['V101', 'João Silva', 'Paracetamol', 3, '2025-06-07'],
+          ['V102', 'Maria Souza', 'Dipirona', 1, '2025-06-12'],
+          ['V103', 'Carlos Lima', 'Ibuprofeno', 2, '2025-06-17'],
+        ];
+      } else if(tipoSelecionado === 'clientes'){
+        cabecalhos = ['ID Cliente', 'Nome', 'Telefone', 'E-mail', 'Data Cadastro'];
+        dados = [
+          ['CL01', 'João Silva', '(11) 99999-9999', 'joao@email.com', '2025-01-10'],
+          ['CL02', 'Maria Souza', '(21) 98888-8888', 'maria@email.com', '2025-02-15'],
+          ['CL03', 'Carlos Lima', '(31) 97777-7777', 'carlos@email.com', '2025-03-20'],
+        ];
+      }
+
+      const indiceData = cabecalhos.findIndex(h => h.toLowerCase().includes('data'));
+      const dtInicio = new Date(inputDataInicio.value);
+      const dtFim = new Date(inputDataFim.value);
+
+      tabelaCabecalho.innerHTML = '';
+      for(const thTexto of cabecalhos){
+        const th = document.createElement('th');
+        th.textContent = thTexto;
+        tabelaCabecalho.appendChild(th);
+      }
+
+      tabelaCorpo.innerHTML = '';
+      for(const linha of dados){
+        if(indiceData !== -1){
+          const dtLinha = new Date(linha[indiceData]);
+          if(dtLinha < dtInicio || dtLinha > dtFim) continue;
+        }
+        const tr = document.createElement('tr');
+        for(const celula of linha){
+          const td = document.createElement('td');
+          td.textContent = celula;
+          tr.appendChild(td);
+        }
+        tabelaCorpo.appendChild(tr);
+      }
+
+      if(tabelaCorpo.children.length === 0){
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = cabecalhos.length;
+        td.style.textAlign = 'center';
+        td.style.fontStyle = 'italic';
+        td.textContent = 'Nenhum dado encontrado para o período selecionado.';
+        tr.appendChild(td);
+        tabelaCorpo.appendChild(tr);
+      }
+    }
+  </script>
+</body>
+</html>
